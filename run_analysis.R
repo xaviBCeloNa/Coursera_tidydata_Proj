@@ -44,12 +44,7 @@ run_analysis <- function() {
   tidy_dataset <- merge(tidy_dataset, data_set$activity_labels, by.x="Activity.ID", by.y="id")
   tidy_dataset <- tidy_dataset[,!(names(tidy_dataset) %in% c("Activity.ID"))]
   
-  
-  ## Below second tidy dataset has average of each variable for each activity and each subject
-  tidy_mean <- ddply(melt(tidy_dataset, id.vars=c("Subject", "Activity")), .(Subject, Activity), summarise, MeanSamples=mean(value))
-  
-  
-  write.csv(tidy_mean, file = "tidy_mean.txt",row.names = FALSE)
+
   write.csv(tidy_dataset, file = "tidy_dataset.txt",row.names = FALSE)
   
 }
