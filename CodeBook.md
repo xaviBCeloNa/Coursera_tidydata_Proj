@@ -1,57 +1,80 @@
+#Code Book
+Input dataset has the below details and the R program has coded it accordingly.
+
+##Input Source
+Source data is from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip.
 
 
-#CodeBook for the tidy dataset
+##Output tidy Dataset - "tidy_dataset.txt"
+This text file generated from R program.  It has below columns.
 
-
-##Data source
-This dataset is derived from the "Human Activity Recognition Using Smartphones Data Set" which was originally made avaiable here: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
-
-
-
-##Feature Selection 
-I refer you to the README and features.txt files in the original dataset to learn more about the feature selection for this dataset. And there you will find the follow description:
-
-The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
-
-Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
-
-Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
-
-The reasoning behind my selection of features is that the assignment explicitly states "Extracts only the measurements on the mean and standard deviation for each measurement." To be complete, I included all variables having to do with mean or standard deviation.
-
-In short, for this derived dataset, these signals were used to estimate variables of the feature vector for each pattern:
- '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
-•tBodyAcc-XYZ
-•tGravityAcc-XYZ
-•tBodyAccJerk-XYZ
-•tBodyGyro-XYZ
-•tBodyGyroJerk-XYZ
-•tBodyAccMag
-•tGravityAccMag
-•tBodyAccJerkMag
-•tBodyGyroMag
-•tBodyGyroJerkMag
-•fBodyAcc-XYZ
-•fBodyAccJerk-XYZ
-•fBodyGyro-XYZ
-•fBodyAccMag
-•fBodyAccJerkMag
-•fBodyGyroMag
-•fBodyGyroJerkMag
-
-The set of variables that were estimated (and kept for this assignment) from these signals are: 
-•mean(): Mean value
-•std(): Standard deviation
-
-Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
-•gravityMean
-•tBodyAccMean
-•tBodyAccJerkMean
-•tBodyGyroMean
-•tBodyGyroJerkMean
-
-Other estimates have been removed for the purpose of this excercise.
-
-Note: features are normalized and bounded within [-1,1].
-
-The resulting variable names are of the following form: tbodyaccmeanx, which means the mean value of tBodyAcc-XYZ.
+###Columns:
+Original Name
+Activity  
+Subject  
+Time.BodyAcc.Mean.X tBodyAcc-mean()-X 
+Time.BodyAcc.Mean.Y tBodyAcc-mean()-Y 
+Time.BodyAcc.Mean.Z tBodyAcc-mean()-Z 
+Time.BodyAcc.Std.X tBodyAcc-std()-X 
+Time.BodyAcc.Std.Y tBodyAcc-std()-Y 
+Time.BodyAcc.Std.Z tBodyAcc-std()-Z 
+Time.GravityAcc.Mean.X tGravityAcc-mean()-X 
+Time.GravityAcc.Mean.Y tGravityAcc-mean()-Y 
+Time.GravityAcc.Mean.Z tGravityAcc-mean()-Z 
+Time.GravityAcc.Std.X tGravityAcc-std()-X 
+Time.GravityAcc.Std.Y tGravityAcc-std()-Y 
+Time.GravityAcc.Std.Z tGravityAcc-std()-Z 
+Time.BodyAccJerk.Mean.X tBodyAccJerk-mean()-X 
+Time.BodyAccJerk.Mean.Y tBodyAccJerk-mean()-Y 
+Time.BodyAccJerk.Mean.Z tBodyAccJerk-mean()-Z 
+Time.BodyAccJerk.Std.X tBodyAccJerk-std()-X 
+Time.BodyAccJerk.Std.Y tBodyAccJerk-std()-Y 
+Time.BodyAccJerk.Std.Z tBodyAccJerk-std()-Z 
+Time.BodyGyro.Mean.X tBodyGyro-mean()-X 
+Time.BodyGyro.Mean.Y tBodyGyro-mean()-Y 
+Time.BodyGyro.Mean.Z tBodyGyro-mean()-Z 
+Time.BodyGyro.Std.X tBodyGyro-std()-X 
+Time.BodyGyro.Std.Y tBodyGyro-std()-Y 
+Time.BodyGyro.Std.Z tBodyGyro-std()-Z 
+Time.BodyGyroJerk.Mean.X tBodyGyroJerk-mean()-X 
+Time.BodyGyroJerk.Mean.Y tBodyGyroJerk-mean()-Y 
+Time.BodyGyroJerk.Mean.Z tBodyGyroJerk-mean()-Z 
+Time.BodyGyroJerk.Std.X tBodyGyroJerk-std()-X 
+Time.BodyGyroJerk.Std.Y tBodyGyroJerk-std()-Y 
+Time.BodyGyroJerk.Std.Z tBodyGyroJerk-std()-Z 
+Time.BodyAccMag.Mean tBodyAccMag-mean() 
+Time.BodyAccMag.Std tBodyAccMag-std() 
+Time.GravityAccMag.Mean tGravityAccMag-mean() 
+Time.GravityAccMag.Std tGravityAccMag-std() 
+Time.BodyAccJerkMag.Mean tBodyAccJerkMag-mean() 
+Time.BodyAccJerkMag.Std tBodyAccJerkMag-std() 
+Time.BodyGyroMag.Mean tBodyGyroMag-mean() 
+Time.BodyGyroMag.Std tBodyGyroMag-std() 
+Time.BodyGyroJerkMag.Mean tBodyGyroJerkMag-mean() 
+Time.BodyGyroJerkMag.Std tBodyGyroJerkMag-std() 
+FFT.BodyAcc.Mean.X fBodyAcc-mean()-X 
+FFT.BodyAcc.Mean.Y fBodyAcc-mean()-Y 
+FFT.BodyAcc.Mean.Z fBodyAcc-mean()-Z 
+FFT.BodyAcc.Std.X fBodyAcc-std()-X 
+FFT.BodyAcc.Std.Y fBodyAcc-std()-Y 
+FFT.BodyAcc.Std.Z fBodyAcc-std()-Z 
+FFT.BodyAccJerk.Mean.X fBodyAccJerk-mean()-X 
+FFT.BodyAccJerk.Mean.Y fBodyAccJerk-mean()-Y 
+FFT.BodyAccJerk.Mean.Z fBodyAccJerk-mean()-Z 
+FFT.BodyAccJerk.Std.X fBodyAccJerk-std()-X 
+FFT.BodyAccJerk.Std.Y fBodyAccJerk-std()-Y 
+FFT.BodyAccJerk.Std.Z fBodyAccJerk-std()-Z 
+FFT.BodyGyro.Mean.X fBodyGyro-mean()-X 
+FFT.BodyGyro.Mean.Y fBodyGyro-mean()-Y 
+FFT.BodyGyro.Mean.Z fBodyGyro-mean()-Z 
+FFT.BodyGyro.Std.X fBodyGyro-std()-X 
+FFT.BodyGyro.Std.Y fBodyGyro-std()-Y 
+FFT.BodyGyro.Std.Z fBodyGyro-std()-Z 
+FFT.BodyAccMag.Mean fBodyAccMag-mean() 
+FFT.BodyAccMag.Std fBodyAccMag-std() 
+FFT.BodyBodyAccJerkMag.Mean fBodyBodyAccJerkMag-mean() 
+FFT.BodyBodyAccJerkMag.Std fBodyBodyAccJerkMag-std() 
+FFT.BodyBodyGyroMag.Mean fBodyBodyGyroMag-mean() 
+FFT.BodyBodyGyroMag.Std fBodyBodyGyroMag-std() 
+FFT.BodyBodyGyroJerkMag.Mean fBodyBodyGyroJerkMag-mean() 
+FFT.BodyBodyGyroJerkMag.Std fBodyBodyGyroJerkMag-std() 
