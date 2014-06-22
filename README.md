@@ -8,13 +8,13 @@ This repository contains my project work for the Coursera project.
 ##Script and the Tidy dataset extraction process:
 run_analysis.R script will merge the test and training data sets together. 
 
-##Prerequisites for this script:
+###Prerequisites for this script:
 Input datasets must be extracted from the source directory named "UCI HAR Dataset"
 After merging testing and training, labels are added and only columns that have to do with mean and standard deviation are kept.
 
 Lastly, the script will create a tidy data set containing the means of all the columns per test subject and per activity. This tidy dataset will be written to a tab-delimited file called tidy_dataset.txt.
 
-## Reference Details from the README file are listed below for reference to the data file details.
+### Reference Details from the README file are listed below for reference to the data file details.
 
 ==================================================================
 Human Activity Recognition Using Smartphones Dataset
