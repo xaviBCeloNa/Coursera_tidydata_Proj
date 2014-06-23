@@ -36,15 +36,15 @@ run_analysis <- function() {
   ## Extracts only the measurements on the mean and standard deviation for each measurement
   tidy_dataset <- rbind(data_set$test, data_set$train)[,c(1, 2, grep("mean\\(|std\\(", data_set$features$name) + 2)]
   
-  ## Uses descriptive activity names to name the activities in the data set
+  ## Uses descriptive activity names
   names(tidy_dataset) <- c("Subject", "Activity.ID", replace_func(data_set$features$name[grep("mean\\(|std\\(", data_set$features$name)]))
   
   
-  ## Appropriately labels the data set with descriptive activity names.
+  ## Merges data sets
   tidy_dataset <- merge(tidy_dataset, data_set$activity_labels, by.x="Activity.ID", by.y="id")
   tidy_dataset <- tidy_dataset[,!(names(tidy_dataset) %in% c("Activity.ID"))]
   
-
+  ## Wite Output file
   write.csv(tidy_dataset, file = "tidy_dataset.txt",row.names = FALSE)
   
 }
@@ -52,20 +52,14 @@ run_analysis <- function() {
 
 
 replace_func <- function(col_name) {
-  col <- gsub("tBody", "Time.Body", col_name)
-  col <- gsub("tGravity", "Time.Gravity", col_name)
-  
-  
-  col <- gsub("fBody", "FFT.Body", col_name)
-  col <- gsub("fGravity", "FFT.Gravity", col_name)
-  
-  
-  col <- gsub("\\-mean\\(\\)\\-", ".Mean.", col_name)
-  col <- gsub("\\-std\\(\\)\\-", ".Std.", col_name)
-  
-  
-  col <- gsub("\\-mean\\(\\)", ".Mean", col_name)
-  col <- gsub("\\-std\\(\\)", ".Std", col_name)
+  col_name <- gsub("tBody", "Time.Body", col_name)
+  col_name <- gsub("tGravity", "Time.Gravity", col_name)
+  col_name <- gsub("fBody", "FFT.Body", col_name)
+  col_name <- gsub("fGravity", "FFT.Gravity", col_name)
+  col_name <- gsub("\\-mean\\(\\)\\-", ".Mean.", col_name)
+  col_name <- gsub("\\-std\\(\\)\\-", ".Std.", col_name)
+  col_name <- gsub("\\-mean\\(\\)", ".Mean", col_name)
+  col_name <- gsub("\\-std\\(\\)", ".Std", col_name)
   
   
   return(col_name)
