@@ -8,11 +8,7 @@ Source data is from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles
 ##Output tidy Dataset - "tidy_dataset.txt"
 This text file generated from R program.  It has below columns.
 
-###Columns list:
-####Original file field - Output file field map
-
-
-Activity
+###Columns list mapped to Original fieldname
 
 Subject 
 
