@@ -1,145 +1,71 @@
-#Code Book
-Input dataset has the below details and the R program has coded it accordingly.
-
-##Input Source
-Source data is from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip.
-
-
-##Output tidy Dataset - "tidy_dataset.txt"
-This text file generated from R program.  It has below columns.
-
-###Columns list mapped to Original fieldname
-
-Subject 
-
-Time.BodyAcc.Mean.X - tBodyAcc-mean()-X 
-
-Time.BodyAcc.Mean.Y - tBodyAcc-mean()-Y 
-
-Time.BodyAcc.Mean.Z - tBodyAcc-mean()-Z 
-
-Time.BodyAcc.Std.X - tBodyAcc-std()-X 
-
-Time.BodyAcc.Std.Y - tBodyAcc-std()-Y 
-
-Time.BodyAcc.Std.Z - tBodyAcc-std()-Z 
-
-Time.GravityAcc.Mean.X - tGravityAcc-mean()-X 
-
-Time.GravityAcc.Mean.Y - tGravityAcc-mean()-Y 
-
-Time.GravityAcc.Mean.Z - tGravityAcc-mean()-Z 
-
-Time.GravityAcc.Std.X - tGravityAcc-std()-X 
-
-Time.GravityAcc.Std.Y - tGravityAcc-std()-Y 
-
-Time.GravityAcc.Std.Z - tGravityAcc-std()-Z 
-
-Time.BodyAccJerk.Mean.X - tBodyAccJerk-mean()-X 
-
-Time.BodyAccJerk.Mean.Y - tBodyAccJerk-mean()-Y 
-
-Time.BodyAccJerk.Mean.Z - tBodyAccJerk-mean()-Z 
-
-Time.BodyAccJerk.Std.X - tBodyAccJerk-std()-X 
-
-Time.BodyAccJerk.Std.Y - tBodyAccJerk-std()-Y 
-
-Time.BodyAccJerk.Std.Z - tBodyAccJerk-std()-Z 
-
-Time.BodyGyro.Mean.X - tBodyGyro-mean()-X 
-
-Time.BodyGyro.Mean.Y - tBodyGyro-mean()-Y 
-
-Time.BodyGyro.Mean.Z - tBodyGyro-mean()-Z 
-
-Time.BodyGyro.Std.X - tBodyGyro-std()-X 
-
-Time.BodyGyro.Std.Y - tBodyGyro-std()-Y 
-
-Time.BodyGyro.Std.Z - tBodyGyro-std()-Z 
-
-Time.BodyGyroJerk.Mean.X - tBodyGyroJerk-mean()-X 
-
-Time.BodyGyroJerk.Mean.Y - tBodyGyroJerk-mean()-Y 
-
-Time.BodyGyroJerk.Mean.Z - tBodyGyroJerk-mean()-Z 
-
-Time.BodyGyroJerk.Std.X - tBodyGyroJerk-std()-X 
-
-Time.BodyGyroJerk.Std.Y - tBodyGyroJerk-std()-Y 
-
-Time.BodyGyroJerk.Std.Z - tBodyGyroJerk-std()-Z 
-
-Time.BodyAccMag.Mean - tBodyAccMag-mean() 
-
-Time.BodyAccMag.Std - tBodyAccMag-std() 
-
-Time.GravityAccMag.Mean - tGravityAccMag-mean() 
-
-Time.GravityAccMag.Std - tGravityAccMag-std() 
-
-Time.BodyAccJerkMag.Mean - tBodyAccJerkMag-mean() 
-
-Time.BodyAccJerkMag.Std - tBodyAccJerkMag-std() 
-
-Time.BodyGyroMag.Mean - tBodyGyroMag-mean() 
-
-Time.BodyGyroMag.Std - tBodyGyroMag-std() 
-
-Time.BodyGyroJerkMag.Mean - tBodyGyroJerkMag-mean() 
-
-Time.BodyGyroJerkMag.Std - tBodyGyroJerkMag-std() 
-
-FFT.BodyAcc.Mean.X - fBodyAcc-mean()-X 
-
-FFT.BodyAcc.Mean.Y - fBodyAcc-mean()-Y 
-
-FFT.BodyAcc.Mean.Z - fBodyAcc-mean()-Z 
-
-FFT.BodyAcc.Std.X - fBodyAcc-std()-X 
-
-FFT.BodyAcc.Std.Y - fBodyAcc-std()-Y 
-
-FFT.BodyAcc.Std.Z - fBodyAcc-std()-Z 
-
-FFT.BodyAccJerk.Mean.X - fBodyAccJerk-mean()-X 
-
-FFT.BodyAccJerk.Mean.Y - fBodyAccJerk-mean()-Y 
-
-FFT.BodyAccJerk.Mean.Z - fBodyAccJerk-mean()-Z 
-
-FFT.BodyAccJerk.Std.X - fBodyAccJerk-std()-X 
-
-FFT.BodyAccJerk.Std.Y - fBodyAccJerk-std()-Y 
-
-FFT.BodyAccJerk.Std.Z - fBodyAccJerk-std()-Z 
-
-FFT.BodyGyro.Mean.X - fBodyGyro-mean()-X 
-
-FFT.BodyGyro.Mean.Y - fBodyGyro-mean()-Y 
-
-FFT.BodyGyro.Mean.Z - fBodyGyro-mean()-Z 
-
-FFT.BodyGyro.Std.X - fBodyGyro-std()-X 
-
-FFT.BodyGyro.Std.Y - fBodyGyro-std()-Y 
-
-FFT.BodyGyro.Std.Z - fBodyGyro-std()-Z 
-
-FFT.BodyAccMag.Mean - fBodyAccMag-mean() 
-
-FFT.BodyAccMag.Std - fBodyAccMag-std() 
-
-FFT.BodyBodyAccJerkMag.Mean - fBodyBodyAccJerkMag-mean() 
-
-FFT.BodyBodyAccJerkMag.Std - fBodyBodyAccJerkMag-std() 
-
-FFT.BodyBodyGyroMag.Mean - fBodyBodyGyroMag-mean() 
-
-FFT.BodyBodyGyroMag.Std - fBodyBodyGyroMag-std() 
-
-FFT.BodyBodyGyroJerkMag.Mean - fBodyBodyGyroJerkMag-mean() 
-
-FFT.BodyBodyGyroJerkMag.Std - fBodyBodyGyroJerkMag-std() 
+## Code Book -> description of the variables used
+## Variables 1 and 2 are factors (qualitative variables)
+## The rest of the variables are Quantitative - Numeric
+1 activity 
+2 subject 
+3 tBodyAcc mean() X 
+4 tBodyAcc mean() Y 
+5 tBodyAcc mean() Z 
+6 tBodyAcc std() X 
+7 tBodyAcc std() Y 
+8 tBodyAcc std() Z 
+9 tGravityAcc mean() X 
+10 tGravityAcc mean() Y 
+11 tGravityAcc mean() Z 
+12 tGravityAcc std() X 
+13 tGravityAcc std() Y 
+14 tGravityAcc std() Z 
+15 tBodyAccJerk mean() X 
+16 tBodyAccJerk mean() Y 
+17 tBodyAccJerk mean() Z 
+18 tBodyAccJerk std() X 
+19 tBodyAccJerk std() Y 
+20 tBodyAccJerk std() Z 
+21 tBodyGyro mean() X 
+22 tBodyGyro mean() Y 
+23 tBodyGyro mean() Z 
+24 tBodyGyro std() X 
+25 tBodyGyro std() Y 
+26 tBodyGyro std() Z 
+27 tBodyGyroJerk mean() X 
+28 tBodyGyroJerk mean() Y 
+29 tBodyGyroJerk mean() Z 
+30 tBodyGyroJerk std() X 
+31 tBodyGyroJerk std() Y 
+32 tBodyGyroJerk std() Z 
+33 tBodyAccMag mean() 
+34 tBodyAccMag std() 
+35 tGravityAccMag mean() 
+36 tGravityAccMag std() 
+37 tBodyAccJerkMag mean() 
+38 tBodyAccJerkMag std() 
+39 tBodyGyroMag mean() 
+40 tBodyGyroMag std() 
+41 tBodyGyroJerkMag mean() 
+42 tBodyGyroJerkMag std() 
+43 fBodyAcc mean() X 
+44 fBodyAcc mean() Y 
+45 fBodyAcc mean() Z 
+46 fBodyAcc std() X 
+47 fBodyAcc std() Y 
+48 fBodyAcc std() Z 
+49 fBodyAccJerk mean() X 
+50 fBodyAccJerk mean() Y 
+51 fBodyAccJerk mean() Z 
+52 fBodyAccJerk std() X 
+53 fBodyAccJerk std() Y 
+54 fBodyAccJerk std() Z 
+55 fBodyGyro mean() X 
+56 fBodyGyro mean() Y 
+57 fBodyGyro mean() Z 
+58 fBodyGyro std() X 
+59 fBodyGyro std() Y 
+60 fBodyGyro std() Z 
+61 fBodyAccMag mean() 
+62 fBodyAccMag std() 
+63 fBodyBodyAccJerkMag mean() 
+64 fBodyBodyAccJerkMag std() 
+65 fBodyBodyGyroMag mean() 
+66 fBodyBodyGyroMag std() 
+67 fBodyBodyGyroJerkMag mean() 
+68 fBodyBodyGyroJerkMag std()

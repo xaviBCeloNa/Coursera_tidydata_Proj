@@ -1,59 +1,90 @@
-## Below function creates tidy data set by making use of plyr and reshape2 packages.
-## Tidy Datset requirements are each variable in one column, each observation on a different row, each table to consitute only one observation kind
-## Firstly merges the training and test data sets to create one dataset.
-## Create a list type of dataset with features, activity labels, test & train dataset in matrix form
-## Measures data by using mean and standard deviation and merges the datasets
-## Replaces with descriptive headers and writes into output text file
+###############################################################
+##
+## run_analysis.R SCRIPT
+##
+###############################################################
 
-run_analysis <- function() {
-  
-  library(plyr)
-  library(reshape2)
-  
+## This script contains the following five steps
 
-  run_analysis_folder <- "UCI HAR Dataset"
-  data_set <- list()   ##Dataset Of List type
-  
-  ##Load Features into dataset
-  data_set$features <- read.table(paste(run_analysis_folder, "features.txt", sep="/"), col.names=c('id', 'name'), stringsAsFactors=FALSE)
-  
-  ##Load Activity Features into datset
-  data_set$activity_labels <- read.table(paste(run_analysis_folder, "activity_labels.txt", sep="/"), col.names=c('id', 'Activity'))
-  
-  ##Load Test Dataset
-  data_set$test <- cbind(subject=read.table(paste(run_analysis_folder, "test", "subject_test.txt", sep="/"), col.names="Subject"),
-                         y=read.table(paste(run_analysis_folder, "test", "y_test.txt", sep="/"), col.names="Activity.ID"),
-                         x=read.table(paste(run_analysis_folder, "test", "x_test.txt", sep="/")))
-  
-  ##Load Train Dataset
-  data_set$train <- cbind(subject=read.table(paste(run_analysis_folder, "train", "subject_train.txt", sep="/"), col.names="Subject"),
-                          y=read.table(paste(run_analysis_folder, "train", "y_train.txt", sep="/"), col.names="Activity.ID"),
-                          x=read.table(paste(run_analysis_folder, "train", "X_train.txt", sep="/")))
-  
-  ## Extracts only the measurements on the mean and standard deviation for each measurement
-  tidy_dataset <- rbind(data_set$test, data_set$train)[,c(1, 2, grep("mean\\(|std\\(", data_set$features$name) + 2)]
-  
-  ## Uses descriptive activity names
-  names(tidy_dataset) <- c("Subject", "Activity.ID", replace_func(data_set$features$name[grep("mean\\(|std\\(", data_set$features$name)]))
-  
-  ## Merges data sets
-  tidy_dataset <- merge(tidy_dataset, data_set$activity_labels, by.x="Activity.ID", by.y="id")
-  tidy_dataset <- tidy_dataset[,!(names(tidy_dataset) %in% c("Activity.ID"))]
-  
-  ## Wite Output file
-  write.csv(tidy_dataset, file = "tidy_dataset.txt",row.names = FALSE)
-}
+###############################################################
+## Step 1: 
+## Merges the training and the test sets to create one data set
+## 
+##    1.A Read train folder and get subject_train.txt, X_train.txt and y_train.txt
+##    2.A Read test folder and get subject_test.txt, X_test.txt and y_test.txt
 
-##Function to replace headers with the meaningful header names
-replace_func <- function(col_name) {
-  col_name <- gsub("tBody", "Time.Body", col_name)
-  col_name <- gsub("tGravity", "Time.Gravity", col_name)
-  col_name <- gsub("fBody", "FFT.Body", col_name)
-  col_name <- gsub("fGravity", "FFT.Gravity", col_name)
-  col_name <- gsub("\\-mean\\(\\)\\-", ".Mean.", col_name)
-  col_name <- gsub("\\-std\\(\\)\\-", ".Std.", col_name)
-  col_name <- gsub("\\-mean\\(\\)", ".Mean", col_name)
-  col_name <- gsub("\\-std\\(\\)", ".Std", col_name)
-  
-  return(col_name)
-}
+subjTrain<-read.table("train//subject_train.txt",col.names=c("subject")) ## Each row identifies the subject who performed the activity for each window sample
+subjTest<-read.table("test//subject_test.txt",col.names=c("subject")) ## Each row identifies the subject who performed the activity for each window sample ## subjTrain and Test dimension 7352 X 1
+
+## We merge all subject data in a single data frame
+mydataSubject<-rbind(subjTrain,subjTest)
+
+xTrain<-read.table("train//X_train.txt") ## Each column corresponds to a feature -> description in features.txt ## xTrain dimension 7352 X 561
+xTest<-read.table("test//x_test.txt") ## Each Row corresponds to its Activity label (info provided in the Readme.txt) ## yTrain dimension 7352 X 1
+
+## We merge all training and test data in a single data frame
+mydata<-rbind(xTrain,xTest)
+
+
+
+###############################################################
+## Step 2: Extracts only the measurements on the mean and
+##          standard deviation for each measurement.  
+
+## We search for those feature labels with mean and std in 
+featureList<-read.table("features.txt", colClasses = "character",col.names=c("ix", "labels"))["labels"] ## 561 x 
+featureLabels<-featureList$labels
+featureSubset<- grepl('mean\\(\\)|std\\(\\)',featureLabels)
+
+## The definitive list only contains mean and std deviation (the other names are discarded)
+featureDefList <- as.character(featureLabels[featureSubset])
+
+
+
+###############################################################
+## Step 3: Uses descriptive activity names to name the activities
+##         in the data set
+##  AND
+##
+## Step 4: Appropriately labels the data set with descriptive variable names
+## 
+
+library(plyr) ## Provide the join function
+
+## Name the data and subset the data accordingly
+colnames(mydata) <- featureLabels
+mydata <- mydata[,featureSubset]
+
+## Read in activities for train and test
+activitiesTest <- read.table("test//Y_test.txt")
+activitiesTrain <- read.table("train//Y_train.txt")
+
+## We merge all training and test activity data in a single data frame
+activities <- rbind(activitiesTest, activitiesTrain)
+colnames(activities) <- "activityLabel"
+
+## Recode activity values as descriptive names using the activity labels file
+activityLabels<-read.table("activity_labels.txt",sep=" ",col.names=c("activityLabel","activity"))
+activities<-join(activities,activityLabels,by="activityLabel",type="left")
+
+
+###############################################################
+## Step 5: Creates a second, independent tidy data set with the average
+##         of each variable for each activity and each subject. 
+
+library(reshape2) ## provide the melt and dcast functionality
+
+## merge all data sets
+allDataSets <- cbind(mydata, activities, mydataSubject)
+
+## Melting data frame for reshaping
+meltingDf <- melt(allDataSets, id=c("subject", "activity"), measure.vars=featureDefList)
+
+## Reshape into tidy data frame by mean using the reshape2 package
+## it is collapsed the different mean and std variables into one column then find the means for the
+## variables that have the same activity and subject, then reexpand.
+reshapeDf <- dcast(meltingDf, activity + subject ~ variable, mean)
+
+## Write the tidy output file
+write.table(reshapeDf,file="tidyDataset.txt")
+

@@ -1,89 +1,52 @@
-Coursera_tidydata_Proj
-======================
-
-##Introduction
-This repository contains my project work for the Coursera project.
-
-
-###Script and the Tidy dataset extraction process:
-run_analysis.R script will merge the test and training data sets together. 
-
-####Prerequisites for this script:
-Input datasets must be extracted from the source directory named "UCI HAR Dataset"
-After merging testing and training, labels are added and only columns that have to do with mean and standard deviation are kept.
-
-Lastly, the script will create a tidy data set containing the means of all the columns per test subject and per activity. This tidy dataset will be written to a tab-delimited file called tidy_dataset.txt.
-
-#### Reference Details from the README file are listed below for reference to the data file details.
-
-==================================================================
-Human Activity Recognition Using Smartphones Dataset
-Version 1.0
-==================================================================
-Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.
-Smartlab - Non Linear Complex Systems Laboratory
-DITEN - Università degli Studi di Genova.
-Via Opera Pia 11A, I-16145, Genoa, Italy.
-activityrecognition@smartlab.ws
-www.smartlab.ws
-==================================================================
-
-The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
-
-The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details. 
-
-For each record it is provided:
-======================================
-
-- Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
-- Triaxial Angular velocity from the gyroscope. 
-- A 561-feature vector with time and frequency domain variables. 
-- Its activity label. 
-- An identifier of the subject who carried out the experiment.
-
-The dataset includes the following files:
-=========================================
-
-- 'README.txt'
-
-- 'features_info.txt': Shows information about the variables used on the feature vector.
-
-- 'features.txt': List of all features.
-
-- 'activity_labels.txt': Links the class labels with their activity name.
-
-- 'train/X_train.txt': Training set.
-
-- 'train/y_train.txt': Training labels.
-
-- 'test/X_test.txt': Test set.
-
-- 'test/y_test.txt': Test labels.
-
-The following files are available for the train and test data. Their descriptions are equivalent. 
-
-- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
-
-- 'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis. 
-
-- 'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the gravity from the total acceleration. 
-
-- 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second. 
-
-Notes: 
-======
-- Features are normalized and bounded within [-1,1].
-- Each feature vector is a row on the text file.
-
-For more information about this dataset contact: activityrecognition@smartlab.ws
-
-License:
-========
-Use of this dataset in publications must be acknowledged by referencing the following publication [1] 
+### Human Activity Recognition Using Smartphones And Tidy Data
+========================================================
+### Licencing
+Use of this dataset in publications must be acknowledged by referencing the following publication [1]
 
 [1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
 
-This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
 
+This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the
+authors or their institutions for its use or misuse. Any commercial use is prohibited.
 Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.
 
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
+
+
+### run_analysis.r
+
+*run_analysis.r* contains the script that transform the following eight data sets: *activity_labels.txt*, *features.txt*
+*subject_test.txt*, *subject_train.txt*, *X_test.txt*, *X_train.txt*, *y_test.txt*, *y_train.txt* into a single tidy data set
+
+The script basically follows the approach recommended:
+1.- Merges the training and the test sets to create one data set
+2.- Extracts only the measurements on the mean and standard deviation for each measurement
+3.- Uses descriptive activity names to name the activities in the data set
+4.- Appropriately labels the data set with descriptive variable names
+5.- Creates a independent tidy data set with the average of each variable for each activity and each subject.
+
+Note: two libraries have been used:
+1.- plyr to perform the join
+2.- reshape to perform  melting and casting
+
+
+### USAGE
+1. Ensure the file "run_analysis.r" is in your working directory and the files used are in the same subdirectories as they came up
+2. In your R console, type: 
+```
+source("run_analysis.r")
+```
+
+
+### OUTPUT EXAMPLE 
+The Data set generated with the script gives a tidy data set with 68 columns and 180 rows. Here is an example output of how the dataset should look
+using the head(reshapeDf)
+
+|  activity |  subject | tBodyAcc-mean()-X    |  tBodyAcc-mean()-Y   |  tBodyAcc-mean()-Z   |
+| :---------|:--------:| --------------------:| --------------------:| --------------------:|
+|1   LAYING |      1   |       0.2347805      |  -0.04356225         |  -0.08520083         |
+|2   LAYING |      2   |       0.2797076      |  -0.01915423         |  -0.11110411         | 
+|3   LAYING |      3   |       0.2761829      |  -0.01861701         |  -0.10792901         |
+|4   LAYING |      4   |       0.2811732      |  -0.01500005         |  -0.11381813         | 
+|5   LAYING |      5   |       0.2740573      |  -0.02272917         |  -0.09466217         | 
